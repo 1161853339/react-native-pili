@@ -89,6 +89,13 @@ public class PiliPlayerViewManager extends SimpleViewManager<PLVideoView> implem
         return mVideoView;
     }
 
+    @Override
+    public void onDropViewInstance(PLVideoView view) {
+        super.onDropViewInstance(view);
+        view.stopPlayback();
+    }
+
+
     private boolean isLiveStreaming(String url) {
         if (url.startsWith("rtmp://")
                 || (url.startsWith("http://") && url.endsWith(".m3u8"))
@@ -204,7 +211,7 @@ public class PiliPlayerViewManager extends SimpleViewManager<PLVideoView> implem
             Log.e(TAG, "Error happened, errorCode = " + errorCode);
             WritableMap event = Arguments.createMap();
             event.putInt("errorCode",errorCode);
-            mEventEmitter.receiveEvent(getTargetId(), Events.ERROR.toString(), Arguments.createMap());
+            mEventEmitter.receiveEvent(getTargetId(), Events.ERROR.toString(), event);
             return true;
         }
     };
