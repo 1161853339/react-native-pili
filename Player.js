@@ -17,7 +17,7 @@ class Player extends Component {
     this._onLoading = this._onLoading.bind(this);
     this._onPaused = this._onPaused.bind(this);
     this._onShutdown = this._onShutdown.bind(this);
-    this._onError = this._onError.bind(this);
+    this._onPlayerError = this._onPlayerError.bind(this);
     this._onPlaying = this._onPlaying.bind(this);
   }
 
@@ -34,7 +34,7 @@ class Player extends Component {
   }
 
 
-  _onError(event) {
+  _onPlayerError(event) {
     this.props.onPlayerError && this.props.onPlayerError(event.nativeEvent);
   }
 
@@ -60,6 +60,7 @@ class Player extends Component {
 }
 
 Player.propTypes = {
+
   source: PropTypes.shape({                          // 是否符合指定格式的物件
     uri: PropTypes.string.isRequired,
     controller: PropTypes.bool, //Android only
